@@ -1,14 +1,23 @@
 <Solution>
+  <Folder Name="/pipelines/">
+    <File Path="build-pipeline.yml" />
+  </Folder>
   <Folder Name="/src/" />
   <Folder Name="/src/Backend/">
+    <Project Path="src/Backend/MyRecipeBook.Api/MyRecipeBook.Api.csproj" />
     <Project Path="src/Backend/MyRecipeBook.Application/MyRecipeBook.Application.csproj" Id="cb7c2c6f-9ee5-484d-83eb-5144b3b4d0ee" />
     <Project Path="src/Backend/MyRecipeBook.Domain/MyRecipeBook.Domain.csproj" Id="269568c6-0dc6-4cfa-bca0-f23abfa92b3a" />
     <Project Path="src/Backend/MyRecipeBook.Infrastructure/MyRecipeBook.Infrastructure.csproj" Id="ffce945f-3528-418d-9b65-0f7f942cc414" />
-    <Project Path="src/Backend/MyRecipeBook.Api/MyRecipeBook.Api.csproj" />
   </Folder>
   <Folder Name="/src/Shared/">
     <Project Path="src/Shared/MyRecipeBook.Communication/MyRecipeBook.Communication.csproj" Id="4c696ae2-f815-43b7-82ab-dd9eb789286d" />
     <Project Path="src/Shared/MyRecipeBook.Exception/MyRecipeBook.Exception.csproj" Id="3dabb853-4083-4f15-a466-595b1cd702ba" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <File Path="tests/coverlet.runsettings" />
+    <Project Path="tests/CommomTestUtilities/CommomTestUtilities.csproj" Id="60349548-c3be-4966-96d6-bc93c77015c6" />
+    <Project Path="tests/UseCases.Tests/UseCases.Tests.csproj" Id="0d2615af-ec0e-4b5e-8432-24a6e271fb91" />
+    <Project Path="tests/Validators.Tests/Validators.Tests.csproj" Id="794e5575-c467-413b-8541-9ba66cc7d552" />
+    <Project Path="tests/WebApi.Tests/WebApi.Tests.csproj" Id="b12a0d01-29fd-4294-8a13-ac4199e1113b" />
+  </Folder>
 </Solution>
