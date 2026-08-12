@@ -26,4 +26,4 @@ pool:
     displayName: 'Publish Code Coverage'
     inputs:
       codeCoverageTool: 'Cobertura'
-      summartFileLocation: ''
+      summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
