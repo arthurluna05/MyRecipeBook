@@ -49,9 +49,9 @@ jobs:
       - name: Generate Coverage Report
         run: |
           reportgenerator \
-            -reports:**/coverage.cobertura.xml \
-            -targetdir:coveragereport \
-            -reporttypes:Html;MarkdownSummary
+            "-reports:**/coverage.cobertura.xml" \
+            "-targetdir:coveragereport" \
+            "-reporttypes:Html;MarkdownSummary"
 
       - name: Publish Coverage Summary
         run: |
