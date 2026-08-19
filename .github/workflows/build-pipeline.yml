@@ -1,29 +1,70 @@
-trigger:
-- develop
+name: Build Pipeline
 
-pool:
-  vmImage: 'ubuntu-latest'
+on:
+  push:
+    branches:
+      - develop
 
-  steps:
-  - task: UseDotNet@2
-    displayName: 'Install .NET SDK'
-    inputs:
-    version: '10.x'
+  pull_request:
+    branches:
+      - develop
 
-  - task: DotNetCoreCLI@2
-    displayName: 'Build'
-    inputs:
-      command: build
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-  - task: DotNetCoreCLI@2
-    displayName: 'Test'
-    inputs:
-      command: test
-      publishTestResults: true
-      arguments: '--settings tests/coverlet.runsettings'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  - task: PublishCodeCoverageResults@2
-    displayName: 'Publish Code Coverage'
-    inputs:
-      codeCoverageTool: 'Cobertura'
-      summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+      - name: Install .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x'
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test Validators
+        run: |
+          dotnet test tests/Validators.Tests/Validators.Tests.csproj \
+            --configuration Release \
+            --settings tests/coverlet.runsettings \
+            --collect:"XPlat Code Coverage"
+
+      - name: Test UseCases
+        run: |
+          dotnet test tests/UseCases.Tests/UseCases.Tests.csproj \
+            --configuration Release \
+            --settings tests/coverlet.runsettings \
+            --collect:"XPlat Code Coverage"
+
+      - name: Install ReportGenerator
+        run: |
+          dotnet tool install -g dotnet-reportgenerator-globaltool
+
+      - name: Generate Coverage Report
+        run: |
+          reportgenerator \
+            -reports:**/coverage.cobertura.xml \
+            -targetdir:coveragereport \
+            -reporttypes:Html;MarkdownSummary
+
+      - name: Publish Coverage Summary
+        run: |
+          cat coveragereport/Summary.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coveragereport
+
+      - name: Upload Coverage XML
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-cobertura
+          path: '**/coverage.cobertura.xml'

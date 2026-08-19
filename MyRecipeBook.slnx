@@ -1,7 +1,4 @@
 <Solution>
-  <Folder Name="/pipelines/">
-    <File Path="build-pipeline.yml" />
-  </Folder>
   <Folder Name="/src/" />
   <Folder Name="/src/Backend/">
     <Project Path="src/Backend/MyRecipeBook.Api/MyRecipeBook.Api.csproj" />
