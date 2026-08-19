@@ -28,9 +28,16 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      - name: Test with Coverage
+      - name: Test Validators
         run: |
-          dotnet test \
+          dotnet test tests/Validators.Tests/Validators.Tests.csproj \
+            --configuration Release \
+            --settings tests/coverlet.runsettings \
+            --collect:"XPlat Code Coverage"
+
+      - name: Test UseCases
+        run: |
+          dotnet test tests/UseCases.Tests/UseCases.Tests.csproj \
             --configuration Release \
             --settings tests/coverlet.runsettings \
             --collect:"XPlat Code Coverage"
