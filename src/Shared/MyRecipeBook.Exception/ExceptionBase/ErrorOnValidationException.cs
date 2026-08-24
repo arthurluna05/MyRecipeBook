@@ -1,4 +1,6 @@
-﻿namespace MyRecipeBook.Exception.ExceptionBase;
+﻿using System.Net;
+
+namespace MyRecipeBook.Exception.ExceptionBase;
 
 public class ErrorOnValidationException : MyRecipeBookException
 {
@@ -9,5 +11,7 @@ public class ErrorOnValidationException : MyRecipeBookException
         _errors = errorMessages;
     }
 
-    public List<string> GetErrorMessages() => _errors; // método público que retorna a lista de mensagens de erro armazenada na propriedade _errors.
+    public override List<string> GetErrorMessages() => _errors; // método público que retorna a lista de mensagens de erro armazenada na propriedade _errors.
+
+    public override HttpStatusCode GetStatusCode() => HttpStatusCode.BadRequest; // método público que retorna o status code HTTP associado a essa exceção, que é 400 (Bad Request).
 }
