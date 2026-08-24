@@ -1,7 +1,7 @@
 ﻿using MyRecipeBook.Domain.Repositories;
 
 namespace MyRecipeBook.Infrastructure.DataAccess;
-
+// unit of work é uma classe que gerencia a transação do banco de dados, garantindo que todas as operações sejam concluídas com sucesso antes de salvar as alterações no banco de dados. Se alguma operação falhar, todas as alterações são revertidas, garantindo a consistência dos dados.
 internal class UnitOfWork : IUnitOfWork
 {
     private readonly MyRecipeBookDbContext _dbContext;

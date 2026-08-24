@@ -20,4 +20,8 @@ internal sealed class UserRepository : IUserWriteOnlyRepository, IUserReadOnlyRe
         return await _dbContext.Users.AnyAsync(user => user.Active && user.Email.Equals(email)); // verifica se existe algum usuário ativo com o email informado, utilizando a função AnyAsync do Entity Framework Core, que retorna true se existir algum usuário que atenda a condição especificada no predicado (user => user.Active && user.Email.Equals(email)), caso contrário retorna false.
     }
 
+    public async Task<User?> GetByEmail(string email) // funcao para buscar um usuario pelo email, para o login, caso nao encontre o usuario, retorna null
+    {
+        return await _dbContext.Users.AsNoTracking().SingleOrDefaultAsync(user => user.Active && user.Email.Equals(email)); // busca o primeiro usuario que atenda a condição especificada no predicado (user => user.Email.Equals(email)), caso não encontre, retorna null 
+    }
 }
