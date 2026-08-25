@@ -1,34 +1,21 @@
 ﻿using CommomTestUtilities.Requests;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using MyRecipeBook.Domain.Extensions;
 using MyRecipeBook.Exception;
-using MyRecipeBook.Infrastructure.DataAccess;
 using Shouldly;
 using System.Globalization;
 using System.Net;
-using System.Net.Http.Json;
 using System.Text.Json;
 using WebApi.Tests.InlineData;
 
 namespace WebApi.Tests.User.Register;
 
-public class RegisterUserAccountTests : IClassFixture<MyRecipeBookApplicationFactory> // Classe de teste de integração para o endpoint de registro de conta de usuário
+public class RegisterUserAccountTests : BaseIntegrationTest
 {
     private const string REQUEST_URI = "/users"; // URI do endpoint de registro de conta de usuário
-
-    private readonly HttpClient _httpclient; // Cliente HTTP para enviar solicitações para a aplicação web
     
-    private readonly MyRecipeBookDbContext _dbContext; // Contexto do banco de dados para acessar os dados da aplicação 
-    public RegisterUserAccountTests(MyRecipeBookApplicationFactory factory)
+    public RegisterUserAccountTests(MyRecipeBookApplicationFactory factory) : base(factory)
     {
-        _httpclient = factory.CreateClient(); // Cria um cliente HTTP a partir da fábrica de aplicação web
-
-        var scope = factory.Services.CreateScope();
-
-        _dbContext = scope.ServiceProvider.GetRequiredService<MyRecipeBookDbContext>(); // Obtém o contexto do banco de dados a partir do provedor de serviços da fábrica de aplicação web
     }
 
     [Fact]
@@ -36,7 +23,7 @@ public class RegisterUserAccountTests : IClassFixture<MyRecipeBookApplicationFac
     {
         var request = RequestRegisterUserAccountJsonBuilder.Build();
 
-        var response = await _httpclient.PostAsJsonAsync(REQUEST_URI, request); // Envia uma solicitação POST para o endpoint "/users" com o corpo da solicitação em formato JSON
+        var response = await Post(REQUEST_URI, request); // Envia uma solicitação POST para o endpoint "/users" com o corpo da solicitação em formato JSON
 
         response.StatusCode.ShouldBe(HttpStatusCode.Created);
 
@@ -49,7 +36,7 @@ public class RegisterUserAccountTests : IClassFixture<MyRecipeBookApplicationFac
 
         responseData.RootElement.GetProperty("tokens").GetProperty("accessToken").GetString().ShouldBeEmpty(); // Verifica se o valor do campo "accessToken" na resposta está vazio
 
-       var userExists = await _dbContext.Users.AnyAsync(user => user.Active && user.Name.Equals(request.Name) && user.Email.Equals(request.Email)); // Verifica se o usuário foi criado no banco de dados, consultando a tabela "Users" para verificar se existe algum registro com o mesmo nome e email enviados na solicitação, e que esteja ativo
+       var userExists = await DbContext.Users.AnyAsync(user => user.Active && user.Name.Equals(request.Name) && user.Email.Equals(request.Email)); // Verifica se o usuário foi criado no banco de dados, consultando a tabela "Users" para verificar se existe algum registro com o mesmo nome e email enviados na solicitação, e que esteja ativo
         
        userExists.ShouldBeTrue(); // Verifica se o usuário foi criado com sucesso no banco de dados
 
@@ -62,10 +49,10 @@ public class RegisterUserAccountTests : IClassFixture<MyRecipeBookApplicationFac
         var request = RequestRegisterUserAccountJsonBuilder.Build();
         request.Name = string.Empty;
 
-        _httpclient.DefaultRequestHeaders.AcceptLanguage.Clear(); // Limpa os cabeçalhos "Accept-Language" da solicitação HTTP
-        _httpclient.DefaultRequestHeaders.AcceptLanguage.ParseAdd(culture); // Define o cabeçalho "Accept-Language" da solicitação HTTP para a cultura especificada, indicando que a resposta esperada deve estar na cultura fornecida
+      
 
-        var response = await _httpclient.PostAsJsonAsync(REQUEST_URI, request); // Envia uma solicitação POST para o endpoint "/users" com o corpo da solicitação em formato JSON, onde o campo "Name" está vazio, esperando que a resposta seja um erro de validação
+        var response = await Post(REQUEST_URI, request, culture); 
+
         response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         await using var responseBody = await response.Content.ReadAsStreamAsync();
 
@@ -81,7 +68,7 @@ public class RegisterUserAccountTests : IClassFixture<MyRecipeBookApplicationFac
             errorsList.ShouldContain(error => error.GetString().IsNotEmpty() && error.GetString()!.Equals(expectedErrorMessage)); // Verifica se o erro de validação retornado corresponde à mensagem de erro esperada para o campo "Name" vazio
         });
 
-        var userExists = await _dbContext.Users.AnyAsync(user => user.Active && user.Name.Equals(request.Name) && user.Email.Equals(request.Email)); // Verifica se o usuário foi criado no banco de dados, consultando a tabela "Users" para verificar se existe algum registro com o mesmo nome e email enviados na solicitação, e que esteja ativo
+        var userExists = await DbContext.Users.AnyAsync(user => user.Active && user.Name.Equals(request.Name) && user.Email.Equals(request.Email)); // Verifica se o usuário foi criado no banco de dados, consultando a tabela "Users" para verificar se existe algum registro com o mesmo nome e email enviados na solicitação, e que esteja ativo
 
         userExists.ShouldBeFalse(); // Verifica se o usuário não foi criado no banco de dados
     }
