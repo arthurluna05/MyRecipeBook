@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roadmap Zero to Hero — AEM as a Cloud Service, Cloud Manager e Edge Delivery Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEFF3;
+    --card:#FFFFFF;
+    --ink:#131A24;
+    --ink-soft:#5A6572;
+    --ink-faint:#8A93A0;
+    --rail:#C6CDD7;
+    --line:#DCE1E8;
+
+    --cm:#2D5BA8;   /* Cloud Manager */
+    --fd:#6B3FA0;   /* Foundations   */
+    --eds:#0A8754;  /* Edge Delivery */
+    --ai:#B87514;   /* IA transversal*/
+
+    --r-arq:#6B3FA0;  /* Arquiteto / Lead            */
+    --r-be:#0F6E7A;   /* Dev back-end / full-stack   */
+    --r-au:#8C2F5B;   /* Autor / time de conteúdo    */
+    --r-po:#5A6572;   /* PO / Stakeholder            */
+
+    --display:"Bricolage Grotesque",Georgia,serif;
+    --body:"Instrument Sans",system-ui,-apple-system,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    overflow-x:hidden;
+    overflow-wrap:break-word;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  section[id],header[id]{scroll-margin-top:60px}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:72px 0 40px;
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(180deg,#F6F7F9 0%,var(--paper) 100%);
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 22px;
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(38px,6.4vw,74px);
+    line-height:.98;
+    letter-spacing:-.035em;
+    margin:0 0 22px;
+    max-width:15ch;
+  }
+  h1 em{font-style:normal;color:var(--eds)}
+  .lede{
+    font-size:clamp(16px,2vw,19px);
+    color:var(--ink-soft);
+    max-width:58ch;
+    margin:0 0 40px;
+  }
+
+  /* signature: build-log manifest */
+  .manifest{
+    font-family:var(--mono);
+    font-size:13px;
+    background:var(--ink);
+    color:#E7EAEF;
+    border-radius:4px;
+    padding:22px 20px;
+    overflow-x:auto;
+    line-height:1.9;
+    box-shadow:0 18px 44px -28px rgba(19,26,36,.85);
+  }
+  .manifest .row{white-space:nowrap;display:block}
+  .manifest .nm{display:inline-block;min-width:22ch}
+  .manifest .bar{letter-spacing:-.06em}
+  .manifest .meta{color:#9AA5B4}
+  .manifest .c-cm{color:#7FA9EE}
+  .manifest .c-fd{color:#BC9AE6}
+  .manifest .c-eds{color:#4FD19B}
+  .manifest .c-ai{color:#E4B25C}
+  .manifest hr{border:0;border-top:1px solid #2A3444;margin:12px 0}
+  .manifest .tot{color:#F3F5F8}
+
+  /* legenda de formatos */
+  .legend{
+    margin-top:22px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:20px 22px;
+  }
+  .legend h4{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;
+    text-transform:uppercase;margin:0 0 14px;color:var(--ink-faint);
+  }
+  .legend dl{margin:0;display:grid;gap:12px}
+  .legend dt{
+    font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--ink);
+  }
+  .legend dt span{font-weight:400;color:var(--ink-soft)}
+  .legend dd{margin:3px 0 0;font-size:14.5px;color:var(--ink-soft);max-width:78ch}
+
+
+  /* ---------- JORNADA (mapa de papéis) ---------- */
+  .journey{padding:72px 0 84px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#F6F7F9 0%,var(--paper) 60%)}
+  .j-head{max-width:66ch;margin:0 0 40px}
+
+  .j-node{
+    background:var(--card);border:1px solid var(--line);border-radius:4px;
+    padding:20px 22px;position:relative;display:flex;flex-direction:column;
+  }
+  .j-kicker{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-faint);display:block;margin-bottom:8px;
+  }
+  .j-node h3{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.02em;margin:0 0 10px}
+  .j-node > p{margin:0 0 14px;font-size:14.5px;color:var(--ink-soft)}
+  .j-steps{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+  .j-steps li{font-size:13.5px;color:var(--ink-soft);padding-left:16px;position:relative;line-height:1.45}
+  .j-steps li b{color:var(--ink);font-weight:600}
+  .j-steps li::before{
+    content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;
+    background:var(--nc,var(--rail));
+  }
+  .j-foot{
+    margin-top:auto;padding-top:14px;
+    font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+    display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline;
+  }
+  .j-foot a{color:var(--nc,var(--ink));text-decoration:none;font-weight:700}
+  .j-foot a:hover{text-decoration:underline}
+  .j-dest-line{
+    margin:12px -22px -20px;padding:12px 22px;
+    border-top:1px solid var(--line);background:#F8F9FB;
+    border-radius:0 0 4px 4px;
+    font-size:13px;color:var(--ink-soft);line-height:1.5;
+  }
+  .j-dest-line b{color:var(--nc,var(--ink));font-weight:700}
+
+  .badge{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:#fff;background:var(--nc,var(--ink));padding:4px 9px;border-radius:2px;
+    display:inline-block;margin-bottom:12px;align-self:flex-start;
+  }
+
+  /* tronco */
+  .j-trunk{border-top:3px solid var(--rail);max-width:820px;margin:0 auto}
+  .j-tiers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+  .j-tier-h{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-faint);display:block;margin-bottom:7px;
+  }
+
+  /* haste de distribuição */
+  .j-stem{height:30px;position:relative}
+  .j-stem::before{
+    content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;
+    background:var(--rail);transform:translateX(-1px);
+  }
+
+  /* ramos */
+  .j-branches{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:16px;align-items:stretch;position:relative;padding-top:24px;
+  }
+  .j-branches::before{
+    content:"";position:absolute;top:0;left:16.6%;right:16.6%;height:2px;background:var(--rail);
+  }
+  .j-branches .j-node{border-top:3px solid var(--nc)}
+  .j-branches .j-node::before{
+    content:"";position:absolute;top:-24px;left:50%;width:2px;height:24px;
+    background:var(--nc);transform:translateX(-1px);
+  }
+  /* a segunda fileira não recebe haste */
+  .j-branches .j-node:nth-child(n+4)::before{display:none}
+
+  /* faixa transversal */
+  .j-band{
+    background:var(--card);border:1px solid var(--line);border-left:4px solid var(--ai);
+    border-radius:4px;padding:18px 22px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;
+  }
+  .j-band .t{flex:1 1 320px;min-width:0}
+  .j-band h3{font-family:var(--display);font-weight:700;font-size:18px;margin:0 0 5px;letter-spacing:-.02em}
+  .j-band p{margin:0;font-size:14px;color:var(--ink-soft)}
+  .j-band .lnk{font-family:var(--mono);font-size:11.5px;color:var(--ai);text-decoration:none;font-weight:700;white-space:nowrap}
+  .j-band .lnk:hover{text-decoration:underline}
+
+  .j-gap{height:20px}
+
+  .j-legend{
+    margin-top:26px;font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+    display:flex;gap:16px;flex-wrap:wrap;
+  }
+  .j-legend span i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;font-style:normal}
+
+  @media (max-width:980px){
+    .j-branches{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .j-branches::before{left:25%;right:25%}
+    .j-branches .j-node:nth-child(n+3)::before{display:none}
+  }
+  @media (max-width:700px){
+    .j-branches{grid-template-columns:1fr;padding-top:0;padding-left:24px;gap:14px}
+    .j-branches::before{
+      top:-22px;bottom:28px;left:5px;right:auto;width:2px;height:auto;
+    }
+    .j-branches .j-node{border-top:1px solid var(--line);border-left:4px solid var(--nc)}
+    .j-branches .j-node::before{display:none}
+    .j-branches .j-node::after{
+      content:"";position:absolute;left:-24px;top:26px;width:20px;height:2px;background:var(--nc);
+    }
+    .j-stem{height:22px}
+    .j-stem::before{left:5px;transform:none}
+    .j-trunk{max-width:none}
+    .j-tiers{grid-template-columns:1fr;gap:16px}
+  }
+
+  /* ---------- STICKY NAV ---------- */
+  nav.tracks{
+    position:sticky;top:0;z-index:20;
+    background:rgba(237,239,243,.93);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.tracks ul{
+    max-width:var(--maxw);margin:0 auto;padding:0 24px;
+    list-style:none;display:flex;gap:4px;overflow-x:auto;
+  }
+  nav.tracks a{
+    display:block;padding:14px 14px;text-decoration:none;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;
+    border-bottom:2px solid transparent;
+  }
+  nav.tracks a:hover{color:var(--ink);border-bottom-color:var(--rail)}
+  nav.tracks a .dot{
+    display:inline-block;width:7px;height:7px;border-radius:50%;
+    margin-right:7px;vertical-align:1px;
+  }
+
+  /* ---------- TRACK ---------- */
+  section.track{padding:76px 0 20px;border-bottom:1px solid var(--line)}
+  .track-head{margin-bottom:44px;max-width:66ch}
+  .track-code{
+    font-family:var(--mono);font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;margin:0 0 12px;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .track-code .sq{width:11px;height:11px;display:inline-block;border-radius:2px}
+  h2{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(28px,4.2vw,44px);line-height:1.04;
+    letter-spacing:-.028em;margin:0 0 14px;
+  }
+  .track-head p{color:var(--ink-soft);margin:0;font-size:16.5px}
+
+  /* rail + stages */
+  .rail{position:relative;padding-left:34px}
+  .rail::before{
+    content:"";position:absolute;left:5px;top:6px;bottom:34px;
+    width:2px;background:var(--rail);
+  }
+  .stage{position:relative;margin-bottom:44px}
+  .stage::before{
+    content:"";position:absolute;left:-34px;top:5px;
+    width:12px;height:12px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--trackc,var(--rail));
+  }
+  .stage.milestone::before{
+    border-radius:2px;transform:rotate(45deg);
+    background:var(--trackc,var(--rail));
+  }
+  .stage-label{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-faint);margin:0 0 4px;
+  }
+  .stage h3{
+    font-family:var(--display);font-weight:700;font-size:21px;
+    letter-spacing:-.02em;margin:0 0 6px;
+  }
+  .stage .goal{
+    color:var(--ink-soft);font-size:15px;margin:0 0 18px;max-width:62ch;
+  }
+
+  /* items */
+  .items{display:grid;gap:12px}
+  .item{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:3px solid var(--trackc,var(--rail));
+    border-radius:3px;
+    padding:16px 18px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  @media (hover:hover) and (pointer:fine){
+    .item:hover{transform:translateX(3px);box-shadow:0 10px 26px -20px rgba(19,26,36,.6)}
+  }
+  .item-top{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:5px}
+  .item-title{font-weight:600;font-size:16px;letter-spacing:-.008em}
+  .item-title a{text-decoration:none;background-image:linear-gradient(currentColor,currentColor);
+    background-size:100% 1px;background-repeat:no-repeat;background-position:0 100%;
+    padding-bottom:1px;}
+  .item-title a:hover{color:var(--trackc,var(--ink))}
+  .item p{margin:0;color:var(--ink-soft);font-size:14.5px;max-width:70ch}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .tag{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+    text-transform:uppercase;padding:3px 7px;border-radius:2px;
+    border:1px solid var(--line);color:var(--ink-faint);white-space:nowrap;
+  }
+  .tag.free{color:#0A8754;border-color:#B6DECB}
+  .tag.paid{color:#B87514;border-color:#EBD5AE}
+  .tag.cert{color:#8C2F5B;border-color:#E8C2D3}
+  .tag.dur{color:var(--ink-soft)}
+  .tag.comm{color:#5A6572}
+  .tag.ilt{color:#2D5BA8;border-color:#B9CBE9;font-weight:700}
+  .tag.fe{color:#fff;background:#C2410C;border-color:#C2410C;font-weight:700}
+
+  .note{
+    margin-top:8px;font-family:var(--mono);font-size:12px;
+    color:var(--ink-faint);line-height:1.6;
+  }
+  .note b{color:var(--ink-soft);font-weight:500}
+
+  /* callout */
+  .callout{
+    background:var(--card);border:1px solid var(--line);
+    border-top:3px solid var(--trackc,var(--rail));
+    border-radius:3px;padding:20px 22px;margin:0 0 40px;
+  }
+  .callout h4{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;
+    text-transform:uppercase;margin:0 0 8px;color:var(--trackc,var(--ink));
+  }
+  .callout p{margin:0 0 8px;font-size:15px;color:var(--ink-soft)}
+  .callout p:last-child{margin-bottom:0}
+
+  /* role table */
+  .roles{padding:76px 0 90px}
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  caption{text-align:left;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+    padding-bottom:14px}
+  th,td{text-align:left;padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:500}
+  td:first-child{font-weight:600;white-space:nowrap}
+  .pill{
+    font-family:var(--mono);font-size:10.5px;padding:2px 6px;border-radius:2px;
+    color:#fff;display:inline-block;margin:1px 3px 1px 0;white-space:nowrap;
+  }
+  .p-fd{background:var(--fd)} .p-cm{background:var(--cm)}
+  .p-eds{background:var(--eds)} .p-ai{background:var(--ai)}
+  .p-fe{background:#C2410C}
+
+  footer{
+    border-top:1px solid var(--line);padding:34px 0 60px;
+    font-family:var(--mono);font-size:12px;color:var(--ink-faint);line-height:1.8;
+  }
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(12px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}
+
+  a:focus-visible,.item:focus-within{outline:2px solid var(--cm);outline-offset:3px}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .item{transition:none}
+  }
+  /* ---------- TABLET ---------- */
+  @media (max-width:820px){
+    .wrap{padding:0 20px}
+    nav.tracks ul{padding:0 20px}
+    section.track{padding:56px 0 16px}
+    .roles{padding:56px 0 70px}
+    .track-head{margin-bottom:32px}
+  }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width:640px){
+    .wrap{padding:0 16px}
+    nav.tracks ul{padding:0 16px;gap:0}
+    nav.tracks a{padding:13px 11px;font-size:11px}
+    section[id],header[id]{scroll-margin-top:52px}
+
+    header.hero{padding:40px 0 28px}
+    .eyebrow{font-size:10.5px;margin-bottom:16px}
+    h1{font-size:clamp(30px,9vw,44px);max-width:none;letter-spacing:-.03em}
+    .lede{font-size:15.5px;margin-bottom:28px}
+
+    /* manifesto: empilha em vez de rolar na horizontal */
+    .manifest{font-size:12px;padding:16px 14px;overflow-x:visible;line-height:1.65}
+    .manifest .row{white-space:normal}
+    .manifest .nm{min-width:0;display:block;margin-bottom:1px}
+    .manifest .bar{display:block;font-size:11px;margin-bottom:2px}
+    .manifest .meta{display:block;font-size:11px;margin-bottom:12px}
+    .manifest .row.tot{font-size:11.5px;line-height:1.7}
+    .manifest hr{margin:6px 0 12px}
+
+    .legend{padding:16px 16px}
+    .legend dt{font-size:12px;line-height:1.45}
+    .legend dd{font-size:13.5px}
+
+    /* jornada */
+    .journey{padding:52px 0 60px}
+    .j-node{padding:18px 16px}
+    .j-node h3{font-size:17px}
+    .j-dest-line{margin:12px -16px -18px;padding:12px 16px;font-size:12.5px}
+    .j-foot{font-size:11px;gap:6px}
+    .j-band{padding:16px 16px;gap:12px}
+    .j-legend{gap:10px 14px;font-size:11px}
+
+    /* trilhas */
+    .rail{padding-left:22px}
+    .rail::before{left:4px}
+    .stage{margin-bottom:34px}
+    .stage::before{left:-22px;width:10px;height:10px}
+    .stage h3{font-size:19px}
+    .stage .goal{font-size:14.5px}
+    .item{padding:14px 14px}
+    .item-top{gap:6px;margin-bottom:6px}
+    .item-title{font-size:15.5px;flex:1 1 100%}
+    .tags{margin-left:0;flex:1 1 100%}
+    .tag{font-size:10px;padding:3px 6px;white-space:normal}
+    .item p{font-size:14px}
+    .note{font-size:11.5px}
+    .callout{padding:16px 16px;margin-bottom:30px}
+    .callout p{font-size:14.5px}
+
+    /* tabela de papéis vira lista de cartões */
+    table,thead,tbody,tr,th,td{display:block}
+    thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    tbody tr{
+      background:var(--card);border:1px solid var(--line);border-radius:3px;
+      padding:14px 16px;margin-bottom:12px;
+    }
+    tbody td{border:0;padding:0 0 12px}
+    tbody td:last-child{padding-bottom:0}
+    tbody td::before{
+      content:attr(data-label);display:block;
+      font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+      color:var(--ink-faint);margin-bottom:4px;
+    }
+    tbody td:first-child{
+      white-space:normal;font-family:var(--display);font-size:18px;font-weight:700;
+      letter-spacing:-.02em;padding-bottom:14px;
+    }
+    tbody td:first-child::before{display:none}
+    .pill{white-space:normal;font-size:10px;margin:2px 4px 2px 0}
+    caption{padding-bottom:12px;font-size:11px}
+
+    footer{padding:26px 0 46px;font-size:11.5px;line-height:1.75}
+  }
+
+  /* ---------- TELAS MUITO ESTREITAS ---------- */
+  @media (max-width:380px){
+    .wrap{padding:0 13px}
+    nav.tracks ul{padding:0 13px}
+    h1{font-size:clamp(27px,9.5vw,34px)}
+    .manifest{font-size:11px}
+    .j-node{padding:16px 14px}
+    .j-dest-line{margin:12px -14px -16px;padding:11px 14px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Plano de enablement · Squad AEM · Atualizado em agosto de 2026</p>
+    <h1><em>Zero to Hero</em> em AEM as a Cloud Service</h1>
+    <p class="lede">Três trilhas sequenciadas — fundação de plataforma, operação em Cloud Manager e especialização em Edge Delivery Services — acrescidas de um módulo transversal de desenvolvimento assistido por IA. Cada item indica fonte, duração estimada e a justificativa do seu posicionamento na sequência.</p>
+
+    <div class="manifest" aria-label="Resumo das trilhas">
+      <span class="row"><span class="nm c-fd">trilha/foundations</span> <span class="bar c-fd">███████░░░</span> <span class="meta">10 recursos · ~9 h autoestudo · +até 10 dias com instrutor (opcional)</span></span>
+      <span class="row"><span class="nm c-cm">trilha/cloud-manager</span> <span class="bar c-cm">███████░░░</span> <span class="meta">16 recursos · ~8 h autoestudo · +1 dia com instrutor (recomendado)</span></span>
+      <span class="row"><span class="nm c-eds">trilha/edge-delivery</span> <span class="bar c-eds">██████████</span> <span class="meta">22 recursos · ~25 h autoestudo · +5,5 dias com instrutor (opcional)</span></span>
+      <span class="row"><span class="nm c-ai">modulo/ai-assisted</span> <span class="bar c-ai">███░░░░░░░</span> <span class="meta">5 recursos · ~3 h autoestudo</span></span>
+      <hr>
+      <span class="row tot">total autoestudo ≈ 45 h · 1 certificação Adobe · 2 certificados de conclusão · 53 recursos mapeados</span>
+    </div>
+
+    <div class="legend" aria-label="Glossário de formatos de treinamento">
+      <h4>Como ler os formatos</h4>
+      <dl>
+        <dt>ILT — <span>Instructor-Led Training</span></dt>
+        <dd>Turma ao vivo conduzida por instrutor certificado Adobe, com data marcada, laboratórios práticos em sandbox e sessão de perguntas e respostas. Equivale ao treinamento presencial ou em sala virtual. É o formato de maior custo e o único que exige agendamento e alocação de agenda do time.</dd>
+        <dt>On-demand — <span>autoestudo</span></dt>
+        <dd>Conteúdo gravado, iniciado a qualquer momento e concluído no ritmo de cada pessoa. Espelha o currículo das turmas ao vivo, mas sem instrutor.</dd>
+        <dt>Spotlight — <span>sessão curta</span></dt>
+        <dd>Módulo on-demand focado, de 25 minutos a 1 hora, sobre um único tema.</dd>
+        <dt>Premium — <span>requer assinatura</span></dt>
+        <dd>Conteúdo do Adobe Premium Learning, disponível apenas para organizações com assinatura ativa. Cursos ILT são cotados separadamente.</dd>
+        <dt>Gratuito</dt>
+        <dd>Documentação, tutoriais, webinars e cursos de certificação abertos, sem custo e sem assinatura.</dd>
+        <dt>FE · front-end — <span>trilha mínima do desenvolvedor web</span></dt>
+        <dd>Marca os 17 recursos que habilitam um desenvolvedor web front-end a construir páginas e blocos em Edge Delivery Services de forma autônoma. Percorridos na ordem em que aparecem no documento, somam aproximadamente 22 horas de autoestudo, além dos cursos com instrutor. Itens sem essa marcação continuam relevantes para outros papéis, mas não são pré-requisito para essa função.</dd>
+      </dl>
+    </div>
+  </div>
+</header>
+
+<nav class="tracks" aria-label="Navegação entre trilhas">
+  <ul>
+    <li><a href="#jornada"><span class="dot" style="background:#8A93A0"></span>Mapa da jornada</a></li>
+    <li><a href="#foundations"><span class="dot" style="background:#6B3FA0"></span>Foundations AEMaaCS</a></li>
+    <li><a href="#cloudmanager"><span class="dot" style="background:#2D5BA8"></span>Cloud Manager</a></li>
+    <li><a href="#eds"><span class="dot" style="background:#0A8754"></span>Edge Delivery Services</a></li>
+    <li><a href="#ai"><span class="dot" style="background:#B87514"></span>Dev assistido por IA</a></li>
+    <li><a href="#papeis"><span class="dot" style="background:#8A93A0"></span>Trilha por papel</a></li>
+  </ul>
+</nav>
+
+<!-- =============== MAPA DA JORNADA =============== -->
+<section class="journey" id="jornada">
+  <div class="wrap">
+    <div class="j-head reveal">
+      <p class="track-code" style="color:var(--ink-faint)"><span class="sq" style="background:var(--rail)"></span> mapa da jornada</p>
+      <h2>Um percurso comum, depois um ramo por papel</h2>
+      <p style="color:var(--ink-soft);margin:0">O squad inteiro parte da mesma base. A partir daí, cada papel segue o ramo correspondente à sua responsabilidade no projeto. Um mesmo curso pode aparecer em mais de um ramo — o que muda é a profundidade exigida e o ponto de parada.</p>
+    </div>
+
+    <div class="j-stack">
+
+      <div class="j-node j-trunk reveal">
+        <span class="j-kicker">Etapa 1 · base comum</span>
+        <h3>Vocabulário, arquitetura e onboarding</h3>
+        <p>Antes de qualquer especialização, o squad precisa falar a mesma língua e entender a cadeia contrato → Admin Console → Cloud Manager → Sites e Assets.</p>
+        <div class="j-tiers">
+          <div class="j-tier">
+            <span class="j-tier-h">Todos os papéis · 45 min</span>
+            <ul class="j-steps" style="--nc:var(--rail)">
+              <li>AEM Foundations (AEM-ALL100)</li>
+            </ul>
+          </div>
+          <div class="j-tier">
+            <span class="j-tier-h">Perfis técnicos · ≈ 4 h</span>
+            <ul class="j-steps" style="--nc:var(--rail)">
+              <li>Onboarding Journey do AEMaaCS</li>
+              <li>AEMaaCS Development Guidelines</li>
+              <li>Edge Delivery Services Overview</li>
+            </ul>
+          </div>
+        </div>
+        <div class="j-foot">
+          <span>sem custo · sem assinatura</span>
+          <a href="#foundations">Abrir trilha Foundations →</a>
+        </div>
+      </div>
+
+      <div class="j-stem" aria-hidden="true"></div>
+
+      <div class="j-branches">
+
+        <div class="j-node reveal" style="--nc:var(--r-arq)">
+          <span class="badge">Arquiteto / Lead</span>
+          <h3>Decisão técnica de ponta a ponta</h3>
+          <ul class="j-steps">
+            <li>Foundations N0–N4</li>
+            <li>Cloud Manager N0–N4</li>
+            <li>EDS N0–N3</li>
+            <li>Módulo de IA</li>
+          </ul>
+          <div class="j-foot">
+            <span>≈ 30 h</span>
+            <a href="#foundations">Ver trilhas →</a>
+          </div>
+          <p class="j-dest-line"><b>Destino:</b> decisões de programa, tier de publish, estratégia de Git e coexistência entre EDS e AEM Sites.</p>
+        </div>
+
+        <div class="j-node reveal" style="--nc:var(--eds)">
+          <span class="badge">Dev EDS / Front-end</span>
+          <h3>Construção de páginas e blocos</h3>
+          <ul class="j-steps">
+            <li>Itens marcados <b>FE · front-end</b></li>
+            <li>EDS N0–N5</li>
+            <li>Módulo de IA</li>
+          </ul>
+          <div class="j-foot">
+            <span>≈ 22 h (FE) a 32 h + 3,5 dias ILT</span>
+            <a href="#eds">Ver trilha →</a>
+          </div>
+          <p class="j-dest-line"><b>Destino:</b> certificação AEM EDS Developer Professional e blocos em produção.</p>
+        </div>
+
+        <div class="j-node reveal" style="--nc:var(--r-be)">
+          <span class="badge">Dev back-end / full-stack</span>
+          <h3>Serviços, componentes e build</h3>
+          <ul class="j-steps">
+            <li>Foundations N0–N4</li>
+            <li>Cloud Manager N0–N3</li>
+            <li>EDS N0–N2</li>
+          </ul>
+          <div class="j-foot">
+            <span>≈ 24 h</span>
+            <a href="#cloudmanager">Ver trilhas →</a>
+          </div>
+          <p class="j-dest-line"><b>Destino:</b> projeto compilando e publicando por pipeline.</p>
+        </div>
+
+        <div class="j-node reveal" style="--nc:var(--cm)">
+          <span class="badge">DevOps / Deployment Manager</span>
+          <h3>Provisionamento e governança</h3>
+          <ul class="j-steps">
+            <li>Cloud Manager N0–N5</li>
+            <li>Foundations N1–N2</li>
+          </ul>
+          <div class="j-foot">
+            <span>≈ 14 h + 1 dia ILT</span>
+            <a href="#cloudmanager">Ver trilha →</a>
+          </div>
+          <p class="j-dest-line"><b>Destino:</b> pipelines, RDE, Bring Your Own Git e permissões finas em produção.</p>
+        </div>
+
+        <div class="j-node reveal" style="--nc:var(--r-au)">
+          <span class="badge">Autor / time de conteúdo</span>
+          <h3>Autoria e publicação</h3>
+          <ul class="j-steps">
+            <li>Foundations N0</li>
+            <li>EDS N0–N1</li>
+          </ul>
+          <div class="j-foot">
+            <span>≈ 4 h + 1 dia ILT</span>
+            <a href="#eds">Ver trilha →</a>
+          </div>
+          <p class="j-dest-line"><b>Destino:</b> certificado de conclusão do curso de document authoring.</p>
+        </div>
+
+        <div class="j-node reveal" style="--nc:var(--r-po)">
+          <span class="badge">PO / Stakeholder</span>
+          <h3>Leitura de trade-offs</h3>
+          <ul class="j-steps">
+            <li>Foundations N0</li>
+            <li>EDS N0</li>
+          </ul>
+          <div class="j-foot">
+            <span>≈ 2 h</span>
+            <a href="#eds">Ver trilha →</a>
+          </div>
+          <p class="j-dest-line"><b>Destino:</b> vocabulário comum e capacidade de avaliar as decisões técnicas apresentadas.</p>
+        </div>
+
+      </div>
+
+      <div class="j-gap"></div>
+
+      <div class="j-band reveal">
+        <div class="t">
+          <span class="j-kicker">Módulo transversal</span>
+          <h3>Desenvolvimento assistido por IA</h3>
+          <p>Previsto para os ramos de Arquiteto e Dev EDS / Front-end, e recomendado a qualquer perfil de desenvolvimento a partir do momento em que houver repertório para avaliar criticamente o que o agente produz.</p>
+        </div>
+        <a class="lnk" href="#ai">Abrir módulo →</a>
+      </div>
+
+      <div class="j-legend">
+        <span><i style="background:var(--r-arq)"></i>Arquiteto / Lead</span>
+        <span><i style="background:var(--eds)"></i>Dev EDS / Front-end</span>
+        <span><i style="background:var(--r-be)"></i>Dev back-end / full-stack</span>
+        <span><i style="background:var(--cm)"></i>DevOps / Deployment Manager</span>
+        <span><i style="background:var(--r-au)"></i>Autor / time de conteúdo</span>
+        <span><i style="background:var(--r-po)"></i>PO / Stakeholder</span>
+        <span><i style="background:var(--ai)"></i>Transversal · IA</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============== TRILHA 1 =============== -->
+<section class="track" id="foundations" style="--trackc:#6B3FA0">
+  <div class="wrap">
+    <div class="track-head reveal">
+      <p class="track-code"><span class="sq" style="background:#6B3FA0"></span> trilha 01 · fundação de plataforma</p>
+      <h2>Arquitetura e fundamentos do AEM as a Cloud Service</h2>
+      <p>A base que todo mundo do squad precisa, independente do papel. Sem isso, as decisões de Cloud Manager e EDS viram tentativa e erro.</p>
+    </div>
+
+    <div class="rail">
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 0 · nivelamento</p>
+        <h3>O que é AEM e o que ele resolve</h3>
+        <p class="goal">Estabelecer vocabulário comum entre time técnico, time de conteúdo e stakeholders do cliente. Precede todos os demais módulos.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://certification.adobe.com/courses/1047" target="_blank" rel="noopener">Adobe Experience Manager Foundations (AEM-ALL100)</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">45 min</span></span>
+            </div>
+            <p>Três módulos: o que é um CMS, o que é o AEM, e um panorama de Sites, Assets e Forms com propósito, features e casos de uso de cada um.</p>
+            <p class="note"><b>Justificativa:</b> é o único item do plano concebido para público misto, de perfis juniores a gestores. Indicado como pré-requisito de kickoff.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 1 · onboarding</p>
+        <h3>A jornada de onboarding, ponta a ponta</h3>
+        <p class="goal">Entender a cadeia contrato → Admin Console → Cloud Manager → Sites/Assets, e quais quatro personas atuam em cada etapa.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/onboarding/journey/overview" target="_blank" rel="noopener">Onboarding Journey — AEM as a Cloud Service</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~2 h leitura</span></span>
+            </div>
+            <p>Onze artigos encadeados, do contrato até o primeiro deploy e o primeiro conteúdo autorado. Define System Administrator, Content Author, Developer e Deployment Manager.</p>
+            <p class="note"><b>Justificativa:</b> é o roteiro oficial de setup. Recomenda-se a leitura na ordem proposta, inclusive dos artigos aparentemente triviais.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-learn/cloud-service/migration/moving-to-aem-as-a-cloud-service/onboarding" target="_blank" rel="noopener">Onboarding to AEM as a Cloud Service (vídeo)</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~20 min</span></span>
+            </div>
+            <p>Versão narrada da mesma jornada, do contrato à criação self-service dos ambientes. Cobre a diferença entre programa production e sandbox.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 2 · arquitetura</p>
+        <h3>Como o AEMaaCS realmente funciona por dentro</h3>
+        <p class="goal">Author, Publish, Dispatcher, repositório mutável vs. imutável, e o que muda em relação ao AEM on-premise.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/development-guidelines" target="_blank" rel="noopener">AEMaaCS Development Guidelines</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~1,5 h</span></span>
+            </div>
+            <p>O que não dá mais para fazer na nuvem: o repositório imutável (<span style="font-family:var(--mono);font-size:.9em">/libs</span>, <span style="font-family:var(--mono);font-size:.9em">/apps</span>) não aceita escrita em runtime, e o CRXDE Lite só existe no author tier de desenvolvimento — nunca em stage ou produção.</p>
+            <p class="note"><b>Ponto de atenção:</b> o Developer Console em programa de produção exige o papel Developer do Cloud Manager; em sandbox, qualquer usuário com product profile de AEM entra.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/overview" target="_blank" rel="noopener">Edge Delivery Services Overview (visão de arquitetura)</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag free">Adobe · gratuito</span><span class="tag dur">~30 min</span></span>
+            </div>
+            <p>Leia aqui, ainda na trilha de fundação, para entender que EDS e AEM Sites coexistem no mesmo domínio e trocam conteúdo nos dois sentidos — não é uma escolha excludente.</p>
+            <p class="note"><b>Justificativa do posicionamento:</b> a decisão de arquitetura entre EDS e publish tradicional ocorre nas primeiras semanas do projeto. O time precisa desse panorama antes de participar da discussão.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 3 · assets e conteúdo</p>
+        <h3>Fundação de DAM antes de migrar um único arquivo</h3>
+        <p class="goal">Estrutura de pastas, taxonomia, metadata schemas e processing profiles. A ordem de execução nesta etapa determina a diferença entre um DAM sustentável e meses de retrabalho.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/perspectives/folder-structure-best-practices-for-aem-assets" target="_blank" rel="noopener">Folder structure best practices for AEM Assets</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~40 min</span></span>
+            </div>
+            <p>Primeiro artigo de uma série de fundamentos de DAM. Nomes descritivos, alinhamento com os metadata schemas e arquivos nas pastas-folha para manter a hierarquia limpa.</p>
+            <p class="note"><b>Regra de ouro:</b> a Adobe recomenda explicitamente não subir os assets reais até alinhar com todos os stakeholders e fechar metadata, profiles, schemas, taxonomia e tagging.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/docs/experience-manager-learn/assets/configuring/processing-profiles.html" target="_blank" rel="noopener">Processing profiles (renditions)</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~25 min</span></span>
+            </div>
+            <p>Só um profile vale por pasta. A recomendação é criar o menor número possível e aplicá-los o mais alto possível na árvore — o custo é ter renditions não usadas contra a cota de storage.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage milestone reveal">
+        <p class="stage-label">Nível 4 · aprofundamento presencial</p>
+        <h3>Formação com instrutor (opcional, alto retorno)</h3>
+        <p class="goal">Para quem vai tomar decisão de arquitetura ou liderar tecnicamente a squad.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/premium/course/16125243" target="_blank" rel="noopener">Develop Websites and Components in Adobe Experience Manager</a></span>
+              <span class="tags"><span class="tag paid">Premium · assinatura</span><span class="tag ilt">ILT · aula com instrutor</span><span class="tag dur">4 dias ou 32 h on-demand</span></span>
+            </div>
+            <p>Criação de projeto por Maven archetype, fundamentos de renderização com Sling, estrutura do JCR e HTL. Cobre também componentes de Sites com o módulo ui.frontend, editable templates, Core Components, Style System, componentes customizados e o Adobe Client Data Layer.</p>
+            <p class="note"><b>Ponto de partida da formação de desenvolvedor.</b> Existe em versão on-demand, o que permite escalonar para o time todo sem depender de turma agendada.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/premium/course/16123488" target="_blank" rel="noopener">Configure and Maintain Adobe Experience Manager</a></span>
+              <span class="tags"><span class="tag paid">Premium · assinatura</span><span class="tag ilt">ILT · aula com instrutor</span><span class="tag dur">3 dias</span></span>
+            </div>
+            <p>Configurações OSGi, repository initialization, run modes e configurações context-aware — e já inclui enablement de Cloud Manager: programas, ambientes, pipelines, cópia de conteúdo e CDN.</p>
+            <p class="note"><b>Sobreposição:</b> cobre boa parte da trilha 02. Se o time fizer este, o curso de 1 dia de Cloud Manager torna-se redundante.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/premium/course/16125242" target="_blank" rel="noopener">Extend and Customize Adobe Experience Manager</a></span>
+              <span class="tags"><span class="tag paid">Premium · assinatura</span><span class="tag ilt">ILT · aula com instrutor</span><span class="tag dur">3 dias</span></span>
+            </div>
+            <p>Trilha Java para back-end: AEM Project Archetype, service users, run modes, Sling Models, servlets e APIs de páginas, assets e workflows.</p>
+            <p class="note"><b>Aplicável apenas</b> se o projeto tiver componente full-stack relevante. Em iniciativas majoritariamente EDS, não se justifica.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============== TRILHA 2 =============== -->
+<section class="track" id="cloudmanager" style="--trackc:#2D5BA8">
+  <div class="wrap">
+    <div class="track-head reveal">
+      <p class="track-code"><span class="sq" style="background:#2D5BA8"></span> trilha 02 · operação e entrega</p>
+      <h2>Cloud Manager, do primeiro programa ao go-live</h2>
+      <p>A trilha mais frequentemente subestimada e a de maior incidência de problemas em projeto. Concentra as decisões irreversíveis: tipo de programa, tier de publish e estratégia de Git.</p>
+    </div>
+
+    <div class="callout reveal">
+      <h4>Três decisões sem reversão posterior</h4>
+      <p><b>1. Publish tier.</b> Ambientes novos são provisionados só com o Author tier. O publish só é ativado se você marcar AEM Publish <em>durante a criação do programa</em>.</p>
+      <p><b>2. Sandbox vs. production.</b> Sandbox não carrega tráfego live, não tem auto-scaling, domínio customizado, IP allow list, regiões extras de publish nem SLA de 99,99%. Para POC de verdade, use um ambiente Dev dentro do programa de produção.</p>
+      <p><b>3. Git.</b> Existe repositório Adobe out-of-the-box, mas ele é só de deployment — sem pull requests, sem controle de acesso granular. Decida a estratégia antes do primeiro commit.</p>
+    </div>
+
+    <div class="rail">
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 0 · o modelo mental</p>
+        <h3>Programas, ambientes e pipelines</h3>
+        <p class="goal">Entender que programa = agrupamento lógico de iniciativa de negócio, e que pipeline é o único caminho para código entrar em qualquer ambiente.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-learn/cloud-service/cloud-manager/environments" target="_blank" rel="noopener">Using Adobe Cloud Manager — Environments</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~10 min</span></span>
+            </div>
+            <p>Ambientes são conjuntos de serviços Author, Publish e Dispatcher: um production, um stage e um ou mais non-production conforme o contratado.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-learn/cloud-service/migration/moving-to-aem-as-a-cloud-service/cloud-manager" target="_blank" rel="noopener">Cloud Manager — production vs. sandbox (vídeo)</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~25 min</span></span>
+            </div>
+            <p>Detalha o que muda na prática: enrollment em auto-update (stage e prod sim, dev não, justamente para o time controlar), opções do menu de ambientes e acesso ao Developer Console.</p>
+            <p class="note"><b>Maior densidade de informação por minuto na trilha.</b> Recomendado assistir em sessão conjunta com o time.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 1 · criação</p>
+        <h3>Provisionar programa e ambientes com as escolhas certas na primeira tentativa</h3>
+        <p class="goal">Ler a documentação de criação antes de abrir o Cloud Manager. A tela de criação de programa contém opções que não podem ser revertidas depois.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/programs/creating-production-programs" target="_blank" rel="noopener">Create Production Programs</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~30 min</span></span>
+            </div>
+            <p>Inclui a aba Security para ativar HIPAA e WAF-DDOS (se houver entitlement) e a data de Go Live, que dispara o widget de boas práticas na página do programa.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/programs/introduction-sandbox-programs" target="_blank" rel="noopener">Introduction to Sandbox Programs</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~15 min</span></span>
+            </div>
+            <p>Sandbox tem auto-creation: adiciona Sites, Assets e EDS como soluções padrão, provisiona um repositório git com projeto de exemplo do AEM Project Archetype, cria um ambiente de dev e uma pipeline non-production.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/manage-environments" target="_blank" rel="noopener">Manage Environments</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~25 min</span></span>
+            </div>
+            <p>Como funciona o status "Update Available": cada pipeline está atrelada a uma versão do AEM, e atualizar é um processo de dois passos que termina rodando a pipeline.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 2 · pipelines</p>
+        <h3>Os quatro tipos de pipeline e quando usar cada um</h3>
+        <p class="goal">Full-stack, front-end, web tier config e config pipeline. Escolher errado aqui custa tempo de build em todo sprint.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/cicd-pipelines/introduction-ci-cd-pipelines" target="_blank" rel="noopener">Cloud Manager CI/CD Pipelines</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~45 min</span></span>
+            </div>
+            <p>Config pipelines cobrem log forwarding, purge, regras de tráfego da CDN incluindo WAF, transformações de request e response, origin selectors, redirects client-side, páginas de erro e chaves de API.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/developing-with-front-end-pipelines" target="_blank" rel="noopener">Develop Sites with the front-end pipeline</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag free">Adobe · gratuito</span><span class="tag dur">~30 min</span></span>
+            </div>
+            <p>O contrato de build: o Cloud Manager roda <span style="font-family:var(--mono);font-size:.9em">npm run build</span> e publica o conteúdo da pasta <span style="font-family:var(--mono);font-size:.9em">dist</span> como estáticos.</p>
+            <p class="note"><b>Boa prática:</b> nunca deixar duas front-end pipelines publicando no mesmo site do mesmo ambiente, e nomear o módulo com o nome do site (ex.: <span style="font-family:var(--mono)">wknd-theme</span> para <span style="font-family:var(--mono)">/content/wknd</span>).</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/operations/config-pipeline" target="_blank" rel="noopener">Use Config Pipelines</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~30 min</span></span>
+            </div>
+            <p>Atenção ao caso EDS: a config pipeline de Edge Delivery não tem dev, stage e prod separados — ela aplica a configuração direto em todos os domain mappings registrados. Use a sintaxe <span style="font-family:var(--mono);font-size:.9em">when</span> para diferenciar por domínio.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 3 · estratégia de Git</p>
+        <h3>Repositório Adobe, repositório da empresa, ou os dois</h3>
+        <p class="goal">A decisão mais estrutural da trilha. Deve estar definida antes do bootstrap do projeto.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/managing-code/integrating-with-git" target="_blank" rel="noopener">Use Git with Cloud Manager</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~40 min</span></span>
+            </div>
+            <p>Cada programa já vem com um repositório git da Adobe, vazio, sem branches nem projeto de exemplo, acessível por personal access token. Serve para deploy — não para ser o repositório de trabalho do time.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/managing-code/private-repositories" target="_blank" rel="noopener">Add a private GitHub repository in Cloud Manager</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~25 min</span></span>
+            </div>
+            <p>Caminho de menor atrito: repositórios em github.com — inclusive GitHub Enterprise Cloud — usam o app da Adobe para validar propriedade, sem webhook, e eliminam a sincronização manual com o repositório Adobe.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/managing-code/external-repositories" target="_blank" rel="noopener">Add external repositories in Cloud Manager</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~35 min</span></span>
+            </div>
+            <p>Se o cliente não usa github.com: GitHub Enterprise Server, GitLab, Bitbucket e Azure DevOps entram por personal access token mais webhook configurado à mão, com escopos específicos por vendor.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/events/experience-manager-gems-recordings/gems2024/private-github-for-aem-cloud-manager" target="_blank" rel="noopener">AEM GEMs — Integrating Private GitHub Repositories</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~60 min</span></span>
+            </div>
+            <p>O ganho concreto: os code quality checks do Cloud Manager passam a rodar no nível do pull request, antes do merge.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://www.aem.live/developer/byo-git" target="_blank" rel="noopener">Bring Your Own Git (para sites Edge Delivery)</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~20 min</span></span>
+            </div>
+            <p>A opção BYOG só aparece no site EDS depois que houver ao menos um repositório externo com status READY no Cloud Manager. Se o repositório não for público, é preciso solicitar a lista de IPs por e-mail à Adobe.</p>
+            <p class="note"><b>Dependência externa:</b> a solicitação de IPs à Adobe tem lead time próprio. Deve constar no cronograma do projeto.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 4 · governança e velocidade</p>
+        <h3>RDE, permissões finas e automação</h3>
+        <p class="goal">O que diferencia um time que opera Cloud Manager com autonomia de um time que depende de suporte a cada entrega.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/introduction/rapid-development-environments" target="_blank" rel="noopener">Rapid Development Environments (RDE)</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~40 min</span></span>
+            </div>
+            <p>RDE não usa a front-end pipeline: pacotes de front-end e configurações YAML vão por linha de comando com o AIO CLI. Web tier e front-end pipelines não são suportadas nele.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-learn/foundation/cloud-manager/cloud-permissions" target="_blank" rel="noopener">Cloud Manager custom permissions</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~20 min</span></span>
+            </div>
+            <p>Os perfis prontos — Business Owner, Program Manager, Deployment Manager, Developer — valem para todos os programas. Perfis customizados restringem acesso a programa, ambiente ou pipeline específicos.</p>
+            <p class="note"><b>Erro recorrente em onboarding:</b> a persona "Developer" do Admin Console não tem relação com o papel "Developer" do Cloud Manager.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage milestone reveal">
+        <p class="stage-label">Nível 5 · formação formal</p>
+        <h3>Curso instrutor-led de Cloud Manager</h3>
+        <p class="goal">Consolidação para quem vai ser Deployment Manager no projeto.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/premium/course/16123701" target="_blank" rel="noopener">Deploy Using Cloud Manager for Adobe Experience Manager</a></span>
+              <span class="tags"><span class="tag paid">Premium · assinatura</span><span class="tag ilt">ILT · aula com instrutor</span><span class="tag dur">1 dia</span></span>
+            </div>
+            <p>Gestão de ambientes, cópia de conteúdo para ambientes inferiores, RDE comparado a Stage/Dev/Production, pipelines non-production e production, testes de qualidade, Dispatcher e CDN da Adobe.</p>
+            <p class="note"><b>Dispensável</b> para quem já concluiu o curso DevOps for AEM ou o Configure and Maintain de 3 dias.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============== TRILHA 3 =============== -->
+<section class="track" id="eds" style="--trackc:#0A8754">
+  <div class="wrap">
+    <div class="track-head reveal">
+      <p class="track-code"><span class="sq" style="background:#0A8754"></span> trilha 03 · especialização</p>
+      <h2>Edge Delivery Services, da primeira página ao bloco em produção</h2>
+      <p>A trilha mais extensa e a que mais se distancia do AEM tradicional. A ordem é relevante: autoria primeiro, desenvolvimento depois. Iniciar pelo código compromete o entendimento do modelo de blocos.</p>
+    </div>
+
+    <div class="rail">
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 0 · panorama</p>
+        <h3>O que é EDS e por que ele existe</h3>
+        <p class="goal">Aproximadamente meio período. Aplicável a todo o squad, incluindo PO e time de conteúdo do cliente.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/overview" target="_blank" rel="noopener">Edge Delivery Services Overview</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~30 min</span></span>
+            </div>
+            <p>Framework de entrega que aproxima renderização e delivery do usuário. Não substitui uma CDN — integra com a sua ou com a CDN gerenciada da Adobe.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/on-demand-events/edge-delivery-services" target="_blank" rel="noopener">Espressos &amp; Experience Manager: Edge Delivery Services</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~57 min</span></span>
+            </div>
+            <p>Webinar com Casey Witter e Rajan Kumar sobre as features mais recentes, o Universal Editor com edição drag-and-drop e o programa SPEED para melhorar Lighthouse score e conversão.</p>
+            <p class="note"><b>Material mais adequado para apresentação a stakeholders de negócio.</b> A abordagem é de conversão e retenção, não técnica.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 1 · autoria</p>
+        <h3>Autorar antes de desenvolver</h3>
+        <p class="goal">Os dois modelos de autoria — baseado em documento e Universal Editor — determinam como os blocos precisam ser escritos. Etapa obrigatória inclusive para perfis de desenvolvimento. A sequência abaixo se divide por acesso: o primeiro item não exige assinatura e serve a qualquer pessoa; os demais dependem de Premium Learning.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/courses/aem-author-sites-with-document-authoring" target="_blank" rel="noopener">Author Edge Delivery Services websites with document authoring</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag free">Adobe · gratuito</span><span class="tag dur">45 min</span></span>
+            </div>
+            <p>Seis módulos com certificado de conclusão: criação e edição de páginas, conteúdo estruturado, autenticação e metadata.</p>
+            <p class="note"><b>Porta de entrada da trilha de autoria.</b> É o único item de autoria sem exigência de assinatura e com certificado, o que permite torná-lo requisito formal para o time de conteúdo do cliente, que dificilmente terá licenças de Premium Learning.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/premium/course/16058023" target="_blank" rel="noopener">Spotlight: Author Content with Edge Delivery Services Using Google Docs</a></span>
+              <span class="tags"><span class="tag paid">Premium · assinatura</span><span class="tag dur">25 min</span></span>
+            </div>
+            <p>Autoria com ferramentas que o time de conteúdo já domina — Google Docs e Word — trabalhando texto, imagens, links, metadata e componentes, com preview via AEM Sidekick antes de publicar.</p>
+            <p class="note"><b>Dispensável</b> para quem já concluiu o curso gratuito acima. A sobreposição de conteúdo é alta e a duração é menor; o diferencial fica na demonstração do Sidekick.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/premium/course/16058021" target="_blank" rel="noopener">Spotlight: Author Content with Edge Delivery Services Using AEM Universal Editor</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag paid">Premium · assinatura</span><span class="tag dur">1 h</span></span>
+            </div>
+            <p>Criar e atualizar páginas no Universal Editor, trabalhar com texto, imagens e blocos, autorar no AEM e publicar no Edge Delivery.</p>
+            <p class="note"><b>Sem sobreposição com o curso gratuito:</b> trata do outro modelo de autoria, com o AEM como fonte de conteúdo.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/premium/course/16122526" target="_blank" rel="noopener">Author Pages with Universal Editor for Edge Delivery Services</a></span>
+              <span class="tags"><span class="tag paid">Premium · assinatura</span><span class="tag ilt">ILT · aula com instrutor</span><span class="tag dur">1 dia</span></span>
+            </div>
+            <p>Formação completa de autoria: default content, blocos, conteúdo reutilizável, uso de IA generativa para acelerar a criação, publicação no Edge Delivery, templates, workflows e metadata de página.</p>
+            <p class="note"><b>Formação recomendada para os autores-chave do cliente.</b> Os itens anteriores cobrem o básico; este consolida quem vai operar o dia a dia.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 2 · primeiro projeto</p>
+        <h3>Do boilerplate ao site no ar</h3>
+        <p class="goal">Sair do zero com projeto próprio rodando local e publicado. Faça as duas trilhas de tutorial — document-based e Universal Editor.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://www.aem.live/developer/tutorial" target="_blank" rel="noopener">aem.live — Developer Tutorial</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag free">Adobe · gratuito</span><span class="tag dur">~1 h</span></span>
+            </div>
+            <p>O tutorial canônico. Ambiente próprio no ar em menos de 30 minutos, com boilerplate, repositório de conteúdo e ciclo de preview e publish.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/docs/experience-manager-learn/sites/edge-delivery-services/overview.html" target="_blank" rel="noopener">Experience League — biblioteca de vídeos EDS</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag free">Adobe · gratuito</span><span class="tag dur">~2 h</span></span>
+            </div>
+            <p>Vídeos curtos de 1 a 5 minutos: pré-requisitos, boilerplate, vínculo com Google Drive ou SharePoint, Sidekick, estrutura de documento, desenvolvimento local e integração com Git.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-learn/sites/edge-delivery-services/developing/universal-editor/0-overview" target="_blank" rel="noopener">EDS + Universal Editor developer tutorial</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag free">Adobe · gratuito</span><span class="tag dur">~3 h</span></span>
+            </div>
+            <p>Criar o projeto de código, configurar o site no AEMaaCS, montar o ambiente local e construir um bloco novo definindo seu content model, com dois métodos de renderização.</p>
+            <p class="note"><b>Alinhado à arquitetura definida para o projeto.</b> Caso seja necessário priorizar um único tutorial, este é o indicado.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/premium/course/16058051" target="_blank" rel="noopener">Spotlight: Develop with Edge Delivery Services Using Adobe Experience Manager</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag paid">Premium · assinatura</span><span class="tag dur">25 min</span></span>
+            </div>
+            <p>Fluxo com repositório GitHub e Google Docs, incluindo JavaScript e CSS customizados dentro da estrutura existente, com publicação no commit e sem etapa de build.</p>
+            <p class="note"><b>Pré-requisitos:</b> conta GitHub, conta Google, HTML/CSS/JS e Node/NPM local.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-learn/sites/developing/edge-delivery-services" target="_blank" rel="noopener">EDS development — o que muda em relação ao AEM tradicional</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag free">Adobe · gratuito</span><span class="tag dur">~15 min</span></span>
+            </div>
+            <p>Página curta de orientação: desenvolver para EDS não é desenvolver para AEM Sites clássico, e as diretrizes vivem em documentação separada.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 3 · integração com AEM</p>
+        <h3>EDS e AEM Sites no mesmo projeto</h3>
+        <p class="goal">O cenário real de cliente grande: coexistência, migração parcial e autoria WYSIWYG preservada.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/on-demand-events/aem-authoring-and-edge-delivery" target="_blank" rel="noopener">AEM GEMs — Getting started with AEM Authoring and EDS</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~60 min</span></span>
+            </div>
+            <p>Criar um projeto EDS habilitado para autoria AEM com o Cloud Service como fonte de conteúdo, mantendo a experiência WYSIWYG para o autor.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/edge-delivery-sites/introduction-to-edge-delivery-services" target="_blank" rel="noopener">Edge Delivery Services no Cloud Manager</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag free">Adobe · gratuito</span><span class="tag dur">~30 min</span></span>
+            </div>
+            <p>A to-do list de onboarding do Cloud Manager conduz do cadastro do site EDS até o go-live: repositório Git externo, domínio customizado, certificado SSL e domain mapping.</p>
+            <p class="note"><b>Ponte entre as trilhas 02 e 03.</b> Faça depois do nível 3 de Cloud Manager.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage milestone reveal">
+        <p class="stage-label">Nível 4 · certificação</p>
+        <h3>AEM Edge Delivery Services — Developer Professional</h3>
+        <p class="goal">O destino da trilha. É a credencial que a Adobe está construindo como padrão para parceiros em EDS.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://certification.adobe.com/courses/1308" target="_blank" rel="noopener">AEM EDS — Developer Professional (EDS-D200)</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag cert">certificação</span><span class="tag free">Adobe · gratuito</span><span class="tag dur">13 h 30</span></span>
+            </div>
+            <p>Dez módulos cobrindo arquitetura serverless de micro-serviços, métodos de autoria, setup, fluxos de desenvolvimento, otimização de entrega, publicação, monitoramento, segurança e tópicos avançados.</p>
+            <p class="note"><b>Acesso:</b> Partner Portal em Learn &gt; Enablement &gt; Training, ou direto no portal de certificação. Há um survey obrigatório antes do primeiro módulo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 5 · imersão</p>
+        <h3>Formação avançada com instrutor</h3>
+        <p class="goal">Para quem vai liderar a implementação técnica de EDS no projeto.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/premium/course/16123654" target="_blank" rel="noopener">Edge Delivery Services: Developer Overview with Universal Editor and Document-Based Editing</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag paid">Premium · assinatura</span><span class="tag ilt">ILT · aula com instrutor</span><span class="tag dur">meio dia</span></span>
+            </div>
+            <p>Visão concisa da arquitetura central do EDS, de como o conteúdo é renderizado e dos benefícios de cada um dos dois modelos de autoria.</p>
+            <p class="note"><b>Pré-requisito formal</b> do curso de 3 dias abaixo. Serve também como nivelamento rápido para quem entra no projeto já em andamento.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/premium/course/16123664" target="_blank" rel="noopener">Develop with Universal Editor for Edge Delivery Services</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag paid">Premium · assinatura</span><span class="tag ilt">ILT · aula com instrutor</span><span class="tag dur">3 dias</span></span>
+            </div>
+            <p>Projetos com GitHub e AEM CLI, blocos customizados em HTML/CSS/JS, conteúdo headless via GraphQL, branding e navegação responsiva, extensão do Universal Editor com App Builder e boas práticas de metadata, busca e performance.</p>
+            <p class="note"><b>Pré-requisito formal:</b> o curso de meio dia listado acima, ou conhecimento equivalente. Exige conta github.com própria com repositório público.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://main--labs--edsmasterclass.aem.live/" target="_blank" rel="noopener">EDS Masterclass (labs públicos)</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag free">Adobe Consulting</span><span class="tag ilt">ILT · aula com instrutor</span><span class="tag dur">2 dias · labs livres</span></span>
+            </div>
+            <p>Autoria document-based, desenvolvimento de blocos, otimização de performance, padrões de middleware, JSON-to-HTML e Workers para integração enterprise. Os labs ficam abertos mesmo sem a turma presencial.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Nível 6 · comunidade</p>
+        <h3>Reforço assíncrono e casos reais</h3>
+        <p class="goal">Material não-oficial. Adequado para desbloquear questões pontuais de implementação, mas não deve ser usado como fonte primária para decisões de arquitetura.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://www.youtube.com/playlist?list=PLEaEQSM_Y4tlrOCheSWep4r6yTjA3eL_0" target="_blank" rel="noopener">Playlist Edge Delivery Services — AEM GEEKS</a></span>
+              <span class="tags"><span class="tag comm">comunidade</span><span class="tag dur">22 vídeos</span></span>
+            </div>
+            <p>Tutoriais de arquitetura EDS e desenvolvimento com autoria baseada em documentos. A playlist comunitária mais completa entre as mapeadas.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://www.youtube.com/playlist?list=PLp5chFE3m-o0Ed2FJx6p_z2ebHOR--JN3" target="_blank" rel="noopener">Playlist Adobe AEM Edge Delivery Services — AEM Tutorials</a></span>
+              <span class="tags"><span class="tag comm">comunidade</span><span class="tag dur">3 vídeos</span></span>
+            </div>
+            <p>Série curta focada no modelo de autoria baseada em documentos.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://www.youtube.com/watch?v=wuar8WnkVYU" target="_blank" rel="noopener">Implementing Adobe EDS: What IT Needs to Know (VASS)</a></span>
+              <span class="tags"><span class="tag comm">comunidade</span><span class="tag dur">webinar</span></span>
+            </div>
+            <p>Sessão técnica de parceiro, com recorte de área de TI — bom para conversa com a engenharia do cliente.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title">Vídeos avulsos e blogs de referência</span>
+              <span class="tags"><span class="tag comm">comunidade</span></span>
+            </div>
+            <p>Complementos que você já mapeou:
+              <a href="https://www.youtube.com/watch?v=2nDPz4Bf3Eg" target="_blank" rel="noopener">vídeo 1</a>,
+              <a href="https://www.youtube.com/watch?v=0DqaheEr5Y0" target="_blank" rel="noopener">vídeo 2</a>,
+              <a href="https://www.youtube.com/watch?v=RlXJ3zZgpgk" target="_blank" rel="noopener">vídeo 3</a>,
+              <a href="https://www.youtube.com/watch?v=3K6-kA8l-mQ" target="_blank" rel="noopener">vídeo 4</a>,
+              <a href="https://innomartech.com/aem-edge-delivery-services-forms-universal-editor-step-by-step-video-tutorial/" target="_blank" rel="noopener">Innomartech — EDS Forms com Universal Editor</a> e
+              <a href="https://medium.com/@roy007/aem-edge-delivery-services-my-approach-54895cabe232" target="_blank" rel="noopener">"EDS: my approach" (Medium)</a>.</p>
+            <p class="note"><b>Ressalva:</b> título e data destes quatro vídeos não puderam ser validados automaticamente. Recomenda-se confirmar a atualidade do conteúdo antes da inclusão no material oficial do squad.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/getting-started-edge-delivery-services-forms/tutorial" target="_blank" rel="noopener">Getting Started with EDS for AEM Forms</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~1,5 h</span></span>
+            </div>
+            <p>Aplicável apenas se AEM Forms estiver no escopo do projeto: formulários via Adaptive Forms Block com submissão direta para Excel ou Google Sheets.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============== MÓDULO IA =============== -->
+<section class="track" id="ai" style="--trackc:#B87514">
+  <div class="wrap">
+    <div class="track-head reveal">
+      <p class="track-code"><span class="sq" style="background:#B87514"></span> módulo transversal · aplica-se às três trilhas</p>
+      <h2>Desenvolvimento AEM assistido por IA</h2>
+      <p>O material mais recente do conjunto e o de maior retorno por hora investida. Recomendado a partir do nível 2 de qualquer trilha — antes disso, falta repertório para avaliar criticamente o que o agente produz.</p>
+    </div>
+
+    <div class="rail">
+
+      <div class="stage reveal">
+        <p class="stage-label">Camada de contexto</p>
+        <h3>Ensinar o agente a conhecer o seu projeto</h3>
+        <p class="goal">O problema não é o prompt — é o contexto. Contexto no prompt some no fim da sessão; contexto no repositório fica.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/perspectives/an-aem-developer-s-guide-to-agents-md-skills-and-prompt-libraries" target="_blank" rel="noopener">An AEM developer's guide to AGENTS.md, skills and prompt libraries</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag free">Adobe · gratuito</span><span class="tag dur">7 min leitura</span></span>
+            </div>
+            <p>Cinco camadas, nesta ordem: AGENTS.md na raiz, arquivos de instrução com escopo, as skills open-source da Adobe, skills próprias do time e uma biblioteca de prompts compartilhada. Depois, servidores MCP locais como extensão.</p>
+            <p class="note"><b>Critério para criar uma skill própria:</b> a partir do momento em que o time corrige o agente da mesma forma pela segunda vez.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://www.aem.live/developer/ai-coding-agents" target="_blank" rel="noopener">Developing with AI Tools (aem.live)</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag free">Adobe · gratuito</span><span class="tag dur">~30 min</span></span>
+            </div>
+            <p>Versão específica de EDS. O AEM Boilerplate já traz um AGENTS.md, e existe um <span style="font-family:var(--mono);font-size:.9em">llms.txt</span> publicado com a documentação em formato otimizado para consumo por modelo.</p>
+            <p class="note"><b>Recomendação prática:</b> ao consultar o agente sobre EDS, instrua-o a pesquisar no site www.aem.live. Sem essa orientação, é comum a confusão entre o Edge Delivery da Adobe e soluções de edge compute de outros fornecedores — ou mesmo com a sigla homônima usada em medicina.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://github.com/adobe/skills" target="_blank" rel="noopener">adobe/skills — catálogo oficial</a></span>
+              <span class="tags"><span class="tag fe" title="Integra a trilha mínima do desenvolvedor web front-end para EDS">FE · front-end</span><span class="tag free">open source</span><span class="tag dur">~40 min setup</span></span>
+            </div>
+            <p>Plugins separados por plataforma: cloud-service, 6.5-lts e edge-delivery-services. No plugin de EDS há skills para criar site do zero, orquestrar desenvolvimento de blocos, importar páginas de site existente, buscar na documentação e inventariar blocos do projeto e da Block Collection.</p>
+          </div>
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title"><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/ai-in-aem/local-development-with-ai-tools" target="_blank" rel="noopener">Local Development with AI Tools — MCP servers</a></span>
+              <span class="tags"><span class="tag free">Adobe · gratuito</span><span class="tag dur">~40 min</span></span>
+            </div>
+            <p>O Quickstart MCP server liga o agente à instância local: leitura de logs, diagnóstico de bundles OSGi que não sobem e trace completo de requisição do Sling. Existe também um MCP de Dispatcher para validar e traçar regras.</p>
+            <p class="note"><b>Sequência recomendada:</b> camada de contexto primeiro, MCP em seguida. O MCP não compensa a ausência de contexto sobre o projeto.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage reveal">
+        <p class="stage-label">Disciplina de uso</p>
+        <h3>Limites de aplicação da IA</h3>
+        <p class="goal">O guia da Adobe é explícito quanto às restrições. Recomenda-se formalizá-las como diretriz do squad.</p>
+        <div class="items">
+          <div class="item">
+            <div class="item-top">
+              <span class="item-title">Regras que valem para o projeto</span>
+              <span class="tags"><span class="tag dur">política</span></span>
+            </div>
+            <p>Não aceitar configuração OSGi ou ciclo de vida de serviço gerados sem referência. Não aceitar regra de Dispatcher sem validação pela ferramenta apropriada. Não confiar em resolução de resource type ou caminho de dialog, que falham silenciosamente. Não aceitar saída única em processos de migração — revisar por partes. E restringir o escopo do agente ao código: nós do JCR e páginas publicadas ficam fora.</p>
+            <p class="note"><b>Princípio:</b> o agente é um par de mãos rápido e sem julgamento sobre a sua situação. A decisão de engenharia continua sendo de quem constrói.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============== PAPÉIS =============== -->
+<section class="roles" id="papeis">
+  <div class="wrap">
+    <div class="track-head reveal">
+      <p class="track-code" style="color:var(--ink-faint)"><span class="sq" style="background:#8A93A0"></span> execução</p>
+      <h2>Quem faz o quê, e em que ordem</h2>
+      <p>O roadmap não é percorrido integralmente por nenhum papel. Abaixo, o recorte mínimo necessário para viabilizar a entrega.</p>
+    </div>
+
+    <table class="reveal">
+      <caption>Sequência recomendada por papel · primeiras 6 semanas</caption>
+      <thead>
+        <tr>
+          <th scope="col">Papel</th>
+          <th scope="col">Sequência</th>
+          <th scope="col">Esforço</th>
+          <th scope="col">Destino</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Papel">Arquiteto / Lead</td>
+          <td data-label="Sequência"><span class="pill p-fd">Foundations N0–N4</span><span class="pill p-cm">Cloud Manager N0–N4</span><span class="pill p-eds">EDS N0–N3</span><span class="pill p-ai">IA</span></td>
+          <td data-label="Esforço">~30 h</td>
+          <td data-label="Destino">Decisões de programa, tier de publish, Git e coexistência EDS/Sites</td>
+        </tr>
+        <tr>
+          <td data-label="Papel">Dev EDS / Front-end</td>
+          <td data-label="Sequência"><span class="pill p-fe">itens marcados FE</span><span class="pill p-eds">EDS N0–N5</span><span class="pill p-ai">IA</span></td>
+          <td data-label="Esforço">~22 h (trilha FE) a ~32 h (trilha completa) + 3,5 dias com instrutor</td>
+          <td data-label="Destino">Certificação EDS Developer Professional</td>
+        </tr>
+        <tr>
+          <td data-label="Papel">Dev back-end / full-stack</td>
+          <td data-label="Sequência"><span class="pill p-fd">Foundations N0–N4</span><span class="pill p-cm">Cloud Manager N0–N3</span><span class="pill p-eds">EDS N0–N2</span></td>
+          <td data-label="Esforço">~24 h</td>
+          <td data-label="Destino">Projeto compilando e publicando por pipeline</td>
+        </tr>
+        <tr>
+          <td data-label="Papel">DevOps / Deployment Manager</td>
+          <td data-label="Sequência"><span class="pill p-cm">Cloud Manager N0–N5</span><span class="pill p-fd">Foundations N1–N2</span></td>
+          <td data-label="Esforço">~14 h + 1 dia com instrutor</td>
+          <td data-label="Destino">Pipelines, RDE, BYOG e permissões finas em produção</td>
+        </tr>
+        <tr>
+          <td data-label="Papel">Autor / time de conteúdo</td>
+          <td data-label="Sequência"><span class="pill p-fd">Foundations N0</span><span class="pill p-eds">EDS N0–N1</span></td>
+          <td data-label="Esforço">~4 h + 1 dia com instrutor</td>
+          <td data-label="Destino">Certificado do curso de document authoring</td>
+        </tr>
+        <tr>
+          <td data-label="Papel">PO / Stakeholder</td>
+          <td data-label="Sequência"><span class="pill p-fd">Foundations N0</span><span class="pill p-eds">EDS N0</span></td>
+          <td data-label="Esforço">~2 h</td>
+          <td data-label="Destino">Vocabulário comum e leitura de trade-offs</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Durações são estimativas, exceto quando declaradas pela própria Adobe (AEM Foundations 45 min, EDS Developer Professional 13 h 30, spotlights de 25 min e 1 h, curso de document authoring 45 min).<br>
+    Cursos marcados como premium exigem Learning Subscription. Cursos ILT (Instructor-Led Training, ou seja, turmas ao vivo com instrutor) são cotados separadamente.<br>
+    Conteúdo compilado a partir de Experience League, aem.live, portal de certificação Adobe, Adobe Learning e comunidade — agosto de 2026.
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    els.forEach(function(e){e.classList.add('in')});
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  },{rootMargin:'0px 0px -8% 0px',threshold:0.05});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+
+</body>
+</html>
